@@ -26,6 +26,11 @@ sites
 # CMake Files
 *.cmake
 
+# misc 
+chess
+run
+output
+
 # Compiled Static libraries
 *.lai
 *.la

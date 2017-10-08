@@ -100,3 +100,26 @@ void Board::PrintBoard()
 	}
 	PrintEdge();
 }
+
+bool Board::MakeMove( int sourceRank, int sourceFFile, int targetRank, int targetFFile )
+{
+	
+	if( sourceRank > 7 || sourceRank < 0 ||
+	sourceFFile > 7 || sourceFFile < 0 ||
+	targetRank > 7 || targetRank < 0 ||
+	targetFFile > 7 || targetFFile < 0 )
+	{
+		return false;
+	}
+
+	if(pieces[sourceRank][sourceFFile]._type == NONE )
+	{
+		return false;
+	}
+	
+	pieces[targetRank][targetFFile]._type = pieces[sourceRank][sourceFFile]._type;
+	pieces[targetRank][targetFFile]._color = pieces[sourceRank][sourceFFile]._color;
+
+	pieces[sourceRank][sourceFFile]._type = NONE;
+	return true;
+}
