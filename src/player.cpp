@@ -1,6 +1,8 @@
 #include "player.hpp"
+#include "move.hpp"
 
 void Player::PlayTurn( Board & board )
 {
-	board.MakeMove( 1, 0, 2, 0 );
+	Move move( 1, 0, 2, 0 );
+	board.MakeMove( move );
 }

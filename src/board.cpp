@@ -1,5 +1,7 @@
 #include "board.hpp"
 #include "piece.hpp"
+#include "move.hpp"
+
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -101,25 +103,24 @@ void Board::PrintBoard()
 	PrintEdge();
 }
 
-bool Board::MakeMove( int sourceRank, int sourceFFile, int targetRank, int targetFFile )
+bool Board::MakeMove( Move & move ) 
 {
-	
-	if( sourceRank > 7 || sourceRank < 0 ||
-	sourceFFile > 7 || sourceFFile < 0 ||
-	targetRank > 7 || targetRank < 0 ||
-	targetFFile > 7 || targetFFile < 0 )
+	if( !move.IsValid() )
 	{
 		return false;
 	}
 
-	if(pieces[sourceRank][sourceFFile]._type == NONE )
+	Piece * source = &pieces[move._sourceRank][move._sourceFFile];
+	Piece * target = &pieces[move._targetRank][move._targetFFile];
+
+	if(source->_type == NONE )
 	{
 		return false;
 	}
 	
-	pieces[targetRank][targetFFile]._type = pieces[sourceRank][sourceFFile]._type;
-	pieces[targetRank][targetFFile]._color = pieces[sourceRank][sourceFFile]._color;
+	target->_type = source->_type;
+	target->_color = source->_color;
 
-	pieces[sourceRank][sourceFFile]._type = NONE;
+	source->_type = NONE;
 	return true;
 }

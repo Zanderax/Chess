@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include "piece.hpp"
+#include "move.hpp"
 
 #define RANK 		8
 #define FFILE 	8
@@ -13,7 +14,7 @@ public:
 	Board();
 	void NewGame();
 	void PrintBoard();
-	bool MakeMove( int sourceRank, int sourceFFile, int targetRank, int targetFFile );
+	bool MakeMove( Move & move );
 
 private:
 	Piece pieces[RANK][FFILE];
