@@ -2,11 +2,21 @@
 #define BOARD_H
 
 #include <stdio.h>
+#include <vector>
 #include "piece.hpp"
 #include "move.hpp"
 
 #define RANK 		8
 #define FFILE 	8
+
+struct Position
+{
+	int rank;
+	int ffile;
+};
+
+using Moves = std::vector<Move>;
+using Positions = std::vector<Position>;
 
 class Board
 {
@@ -15,11 +25,14 @@ public:
 	void NewGame();
 	void PrintBoard();
 	bool MakeMove( Move & move );
+	Piece pieces[RANK][FFILE];
+	void ValidMoves( Moves & moves, int rank, int ffile );
+	Positions ValidPieces( Color color );	
 
 private:
-	Piece pieces[RANK][FFILE];
 	void ClearBoard();
 	void PrintRank( int rank );
+	void PawnMoves( Moves & moves, int rank, int file, Color color );
 };
 
 #endif //PIECE_H

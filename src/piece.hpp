@@ -1,6 +1,9 @@
 #ifndef PIECE_H
 #define PIECE_H
 
+#include <list>
+#include "move.hpp"
+
 enum PieceType
 {
 	NONE,
@@ -17,6 +20,7 @@ enum Color
 	BLACK,
 	WHITE
 };
+
 
 class Piece
 {

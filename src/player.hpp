@@ -6,7 +6,8 @@
 class Player
 {
 public:
-	void PlayTurn( Board & board );
+	bool PlayTurn( Board & board, Color color );
+	Color _color;
 };
 
 #endif // PLAYER_H

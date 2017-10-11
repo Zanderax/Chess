@@ -62,3 +62,4 @@ void Piece::PrintPiece( Color squareColor )
 	char type = CharForPieceType( _type ); 
 	printf( "\033[4;1;%d;%dm%c\033[0m", bgColor, fgColor, type );
 }
+

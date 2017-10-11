@@ -10,10 +10,10 @@
 class Chess
 {
 public:
-	void PlayGame();
+	Color PlayGame();
 private:
 	Board board;
-	Player players[];
+	Player players[NUM_PLAYERS];
 };
 
 #endif // CHESS_H

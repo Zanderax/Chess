@@ -19,18 +19,18 @@ void Board::ClearBoard()
 
 Board::Board()
 {
-	ClearBoard();
 	NewGame();
 }
 
 void Board::NewGame()
 {
+	ClearBoard();
 	for(int i = 0; i < 8; ++i)
 	{
 		pieces[6][i]._color = BLACK;
 		pieces[7][i]._color = BLACK;
 	}
-
+	/*
 	pieces[0][0]._type = ROOK;
 	pieces[0][1]._type = KNIGHT;
 	pieces[0][2]._type = BISHOP;
@@ -49,7 +49,7 @@ void Board::NewGame()
 	pieces[7][5]._type = BISHOP;
 	pieces[7][6]._type = KNIGHT;
 	pieces[7][7]._type = ROOK;
-	
+	*/
 	for(int i = 0; i < 8; ++i)
 	{
 		pieces[1][i]._type = PAWN;
@@ -123,4 +123,84 @@ bool Board::MakeMove( Move & move )
 
 	source->_type = NONE;
 	return true;
+}
+
+void AddMove( Moves & moves, int sourceRank, int sourceFFile, int targetRank, int targetFFile )
+{
+	Move move( sourceRank, sourceFFile, targetRank, targetFFile );
+	moves.push_back( move );
+}
+
+void Board::PawnMoves( Moves & moves, int rank, int file, Color color )
+{
+	if( rank == 7 || rank == 0 )
+	{
+		return;
+	}
+	if( color == WHITE )
+	{
+		if( pieces[rank + 1][file]._type == NONE )
+		{
+			AddMove( moves, rank, file, rank + 1, file );
+		}
+		if( pieces[rank + 1][file + 1]._type != NONE &&
+				pieces[rank + 1][file + 1]._color == BLACK )
+		{
+			AddMove( moves, rank, file, rank + 1, file + 1 );
+		}
+		if( pieces[rank + 1][file - 1]._type != NONE &&
+				pieces[rank + 1][file - 1]._color == BLACK )
+		{
+			AddMove( moves, rank, file, rank + 1, file - 1 );
+		}
+	}
+	if( color == BLACK )
+	{
+		if( pieces[rank - 1][file]._type == NONE )
+		{
+			AddMove( moves, rank, file, rank - 1, file );
+		}
+		if( pieces[rank - 1][file + 1]._type != NONE &&
+				pieces[rank - 1][file + 1]._color == WHITE )
+		{
+			AddMove( moves, rank, file, rank - 1, file + 1 );
+		}
+		if( pieces[rank - 1][file - 1]._type != NONE &&
+				pieces[rank - 1][file - 1]._color == WHITE )
+		{
+			AddMove( moves, rank, file, rank - 1, file - 1 );
+		}
+	}
+}
+
+void Board::ValidMoves( Moves & moves, int rank, int file )
+{
+	auto type = pieces[rank][file]._type;
+	auto color = pieces[rank][file]._color;
+	switch(type)
+	{
+		case NONE:
+			return;
+		case PAWN:
+			return PawnMoves( moves, rank, file, color );
+		default:
+			return;
+	}
+}
+
+Positions Board::ValidPieces( Color color )
+{
+	Positions positions;
+	for(int r = 0; r < RANK; ++r)
+	{
+		for(int f = 0; f < FFILE; ++f)
+		{
+			if(pieces[r][f]._color == color && 
+					pieces[r][f]._type != NONE)
+			{
+				positions.push_back( Position{r,f} );
+			}
+		}
+	}
+	return positions;
 }
