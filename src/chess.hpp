@@ -5,7 +5,7 @@
 #include "board.hpp"
 
 #define NUM_PLAYERS 2
-#define MAX_TURNS 100
+#define MAX_TURNS 100000
 
 class Chess
 {

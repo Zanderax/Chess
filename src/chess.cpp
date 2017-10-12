@@ -8,7 +8,7 @@ int main()
 	Chess chess;
 	int blackWins = 0;
 	int whiteWins = 0;
-	for(int i = 0; i < 10; ++i)
+	for(int i = 0; i < 50; ++i)
 	{
 		Color color;
 		color = chess.PlayGame();
@@ -23,9 +23,9 @@ int main()
 			++whiteWins;
 		}
 		printf("Score - Black:%d White:%d", blackWins, whiteWins);
-		getchar();
+		//getchar();
 	}
-	printf("Black Wins = %d, White Wins =%d\n", blackWins, whiteWins );
+	printf("\nBlack Wins = %d, White Wins =%d\n", blackWins, whiteWins );
 }
 
 Color Chess::PlayGame()
@@ -37,12 +37,12 @@ Color Chess::PlayGame()
 	
 	for(int i = 0; i < MAX_TURNS; ++i )
 	{
-		for(int i = 0; i < NUM_PLAYERS; ++i )
+		for(int j = 0; j < NUM_PLAYERS; ++j )
 		{
 			board.PrintBoard();
-			printf( "\nPlayer %d's turn.\n", i );
+			printf( "\nPlayer %d's turn.\nTurn = %d\n", j, i );
 			Color color = WHITE;
-			if(i%2 != 0)
+			if(j%2 != 0)
 			{
 				color = BLACK;
 			}
