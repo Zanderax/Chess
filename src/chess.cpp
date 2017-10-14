@@ -1,17 +1,33 @@
 #include <unistd.h>
 #include <iostream>
+#include <string>
 #include "chess.hpp"
 
+#define NUM_GAMES 10
 
-int main()
+int main( int argc, char *argv[] )
 {
+	int numGames = NUM_GAMES;
+	
+	if(argc>1)
+	{
+		numGames = atoi(argv[1]);
+	}
+	
+	printf( "Playing %d games. Press any key to start.", numGames );
+	getchar();
 	Chess chess;
+	chess.PlayManyGames( numGames );
+}
+
+void Chess::PlayManyGames( int numGames )
+{
 	int blackWins = 0;
 	int whiteWins = 0;
-	for(int i = 0; i < 50; ++i)
+	for(int i = 0; i < numGames; ++i)
 	{
 		Color color;
-		color = chess.PlayGame();
+		color = this->PlayGame(i);
 		if(color == BLACK)
 		{
 			printf("Black Wins\n");
@@ -25,10 +41,10 @@ int main()
 		printf("Score - Black:%d White:%d", blackWins, whiteWins);
 		//getchar();
 	}
-	printf("\nBlack Wins = %d, White Wins =%d\n", blackWins, whiteWins );
+	printf("\nBlack Wins = %d, White Wins = %d\n", blackWins, whiteWins );
 }
 
-Color Chess::PlayGame()
+Color Chess::PlayGame( int gameNum )
 {
 	board.NewGame();
 	board.PrintBoard();
@@ -40,7 +56,7 @@ Color Chess::PlayGame()
 		for(int j = 0; j < NUM_PLAYERS; ++j )
 		{
 			board.PrintBoard();
-			printf( "\nPlayer %d's turn.\nTurn = %d\n", j, i );
+			printf( "\nGameNum = %d\nPlayer %d's turn.\nTurn = %d\n",gameNum, j, i );
 			Color color = WHITE;
 			if(j%2 != 0)
 			{

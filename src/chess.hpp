@@ -10,8 +10,9 @@
 class Chess
 {
 public:
-	Color PlayGame();
+	void PlayManyGames( int numGames );
 private:
+	Color PlayGame( int gameNum );
 	Board board;
 	Player players[NUM_PLAYERS];
 };

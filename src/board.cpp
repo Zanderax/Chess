@@ -144,12 +144,14 @@ void Board::PawnMoves( Moves & moves, int rank, int file, Color color )
 			AddMove( moves, rank, file, rank + 1, file );
 		}
 		if( pieces[rank + 1][file + 1]._type != NONE &&
-				pieces[rank + 1][file + 1]._color == BLACK )
+				pieces[rank + 1][file + 1]._color == BLACK &&
+				file != 7 )
 		{
 			AddMove( moves, rank, file, rank + 1, file + 1 );
 		}
 		if( pieces[rank + 1][file - 1]._type != NONE &&
-				pieces[rank + 1][file - 1]._color == BLACK )
+				pieces[rank + 1][file - 1]._color == BLACK &&
+				file != 0)
 		{
 			AddMove( moves, rank, file, rank + 1, file - 1 );
 		}
