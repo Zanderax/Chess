@@ -1,8 +1,10 @@
 #ifndef PIECE_H
 #define PIECE_H
 
-#include <list>
+#include <vector>
 #include "move.hpp"
+
+using Moves = std::vector<Move>;
 
 enum PieceType
 {
@@ -29,6 +31,7 @@ public:
 	void PrintPiece( Color squareColor );
 	Color _color;
 	PieceType _type;
+	virtual Moves getMoves() { Moves moves; return moves; };
 };
 
 #endif //PIECE_H
