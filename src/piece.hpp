@@ -6,6 +6,8 @@
 
 using Moves = std::vector<Move>;
 
+class Board;
+
 enum PieceType
 {
 	NONE,
@@ -28,10 +30,20 @@ class Piece
 {
 public:
 	Piece();
+	Piece( Color color, PieceType type, int rank, int ffile);
 	void PrintPiece( Color squareColor );
 	Color _color;
 	PieceType _type;
-	virtual Moves getMoves() { Moves moves; return moves; };
+	int _rank;
+	int _ffile;
+	Moves GetMoves(Board *board);
+private:
+	Moves GetPawnMoves(Board *board);
+	Moves GetKingMoves(Board *board);
+	Moves GetQueenMoves(Board *board);
+	Moves GetBishopMoves(Board *board);
+	Moves GetKnightMoves(Board *board);
+	Moves GetRookMoves(Board *board);
 };
 
 #endif //PIECE_H

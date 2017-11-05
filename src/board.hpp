@@ -32,7 +32,6 @@ public:
 private:
 	void ClearBoard();
 	void PrintRank( int rank );
-	void PawnMoves( Moves & moves, int rank, int file, Color color );
 };
 
 #endif //PIECE_H
