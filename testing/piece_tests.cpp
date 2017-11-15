@@ -32,7 +32,7 @@ TEST( PieceTest, PawnMoves )
 	board.pieces[5][6]._type = PAWN;	
 
 	//Execute
-	moves = board.pieces[5][6].GetPawnMoves(&board);
+	moves = board.pieces[5][6].GetMoves(&board);
 	
 	//Assert
 	ASSERT_EQ( moves.size(), 1);
@@ -52,7 +52,7 @@ TEST( PieceTest, PawnMovesSingleTake )
 	board.pieces[4][5]._type = PAWN;
 
 	//Execute
-	moves = board.pieces[5][6].GetPawnMoves(&board);
+	moves = board.pieces[5][6].GetMoves(&board);
 	
 	//Assert
 	ASSERT_EQ( moves.size(), 2);
@@ -73,7 +73,7 @@ TEST( PieceTest, PawnMovesDoubleTake )
 	board.pieces[4][7]._type = PAWN;
 
 	//Execute
-	moves = board.pieces[5][6].GetPawnMoves(&board);
+	moves = board.pieces[5][6].GetMoves(&board);
 	
 	//Assert
 	ASSERT_EQ( moves.size(), 3);
@@ -93,7 +93,7 @@ TEST( PieceTest, PawnMovesBlocked )
 	board.pieces[4][6]._type = PAWN;
 
 	//Execute
-	moves = board.pieces[5][6].GetPawnMoves(&board);
+	moves = board.pieces[5][6].GetMoves(&board);
 	
 	//Assert
 	ASSERT_EQ( moves.size(), 0);
@@ -112,7 +112,7 @@ TEST( PieceTest, PawnMovesEnd )
 	
 	
 	//Execute
-	moves = board.pieces[0][6].GetPawnMoves(&board);
+	moves = board.pieces[0][6].GetMoves(&board);
 	
 	//Assert
 	ASSERT_EQ( moves.size(), 0);
@@ -130,7 +130,7 @@ TEST( PieceTest, KingMoves )
 	board.pieces[5][6]._type = KING;	
 	
 	//Execute
-	moves = board.pieces[5][6].GetKingMoves(&board);
+	moves = board.pieces[5][6].GetMoves(&board);
 	
 	//Assert
 	ASSERT_EQ( moves.size(), 8);
@@ -150,7 +150,7 @@ TEST( PieceTest, KingMovesTake )
 	board.pieces[5][7]._type = PAWN;	
 	
 	//Execute
-	moves = board.pieces[5][6].GetKingMoves(&board);
+	moves = board.pieces[5][6].GetMoves(&board);
 	
 	//Assert
 	ASSERT_EQ( moves.size(), 8);
@@ -169,7 +169,7 @@ TEST( PieceTest, KingMovesEdge )
 	
 	
 	//Execute
-	moves = board.pieces[5][7].GetKingMoves(&board);
+	moves = board.pieces[5][7].GetMoves(&board);
 	
 	//Assert
 	ASSERT_EQ( moves.size(), 5);
@@ -188,8 +188,27 @@ TEST( PieceTest, KingMovesCorner )
 	
 	
 	//Execute
-	moves = board.pieces[7][7].GetKingMoves(&board);
+	moves = board.pieces[7][7].GetMoves(&board);
 	
 	//Assert
 	ASSERT_EQ( moves.size(), 3);
+}
+
+TEST( PieceTest, RookMoves )
+{
+	//Setup
+	Board board;
+	Moves moves;
+
+	setUpBoard( board );
+
+	board.pieces[4][4]._color = BLACK;
+	board.pieces[4][4]._type = ROOK;
+	
+	
+	//Execute
+	moves = board.pieces[4][4].GetMoves(&board);
+	
+	//Assert
+	ASSERT_EQ( moves.size(), 14);
 }

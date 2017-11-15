@@ -221,9 +221,70 @@ Moves Piece::GetKnightMoves(Board * /*board*/)
 	return moves; 
 }
 
-Moves Piece::GetRookMoves(Board * /*board*/)
+Moves Piece::GetRookMoves(Board * board )
 {
+	Piece (*pieces)[8] = board->pieces;
 	Moves moves; 
+	int tempRank = _rank;
+	while(tempRank > 0)
+	{
+		tempRank--;
+		if(pieces[tempRank][_ffile]._type != NONE)
+		{
+			if(pieces[tempRank][_ffile]._color != _color)
+			{
+				AddMove( moves, _rank, _ffile, tempRank, _ffile );
+			}
+			break;
+		}
+		AddMove( moves, _rank, _ffile, tempRank, _ffile );
+	}
+	
+	tempRank = _rank;
+	while(tempRank < 7)
+	{
+		tempRank++;
+		if(pieces[tempRank][_ffile]._type != NONE)
+		{
+			if(pieces[tempRank][_ffile]._color != _color)
+			{
+				AddMove( moves, _rank, _ffile, tempRank, _ffile );
+			}
+			break;
+		}
+		AddMove( moves, _rank, _ffile, tempRank, _ffile );
+	}
+
+	int tempFFile = _ffile;
+	while(tempFFile > 0)
+	{
+		tempFFile--;
+		if(pieces[_rank][tempFFile]._type != NONE)
+		{
+			if(pieces[_rank][tempFFile]._color != _color)
+			{
+				AddMove( moves, _rank, _ffile, _rank, tempFFile );
+			}
+			break;
+		}
+		AddMove( moves, _rank, _ffile, _rank, tempFFile );
+	}
+	
+	tempFFile = _ffile;
+	while(tempFFile < 7)
+	{
+		tempFFile++;
+		if(pieces[_rank][tempFFile]._type != NONE)
+		{
+			if(pieces[_rank][tempFFile]._color != _color)
+			{
+				AddMove( moves, _rank, _ffile, _rank, tempFFile );
+			}
+			break;
+		}
+		AddMove( moves, _rank, _ffile, _rank, tempFFile );
+	}
+
 	return moves; 
 }
 
