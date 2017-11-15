@@ -38,8 +38,8 @@ public:
 	int _ffile;
 	Moves GetMoves(Board *board);
 	Moves GetPawnMoves(Board *board);
-private:
 	Moves GetKingMoves(Board *board);
+private:
 	Moves GetQueenMoves(Board *board);
 	Moves GetBishopMoves(Board *board);
 	Moves GetKnightMoves(Board *board);

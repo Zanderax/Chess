@@ -98,3 +98,98 @@ TEST( PieceTest, PawnMovesBlocked )
 	//Assert
 	ASSERT_EQ( moves.size(), 0);
 }
+
+TEST( PieceTest, PawnMovesEnd )
+{
+	//Setup
+	Board board;
+	Moves moves;
+
+	setUpBoard( board );
+
+	board.pieces[0][6]._color = BLACK;
+	board.pieces[0][6]._type = PAWN;	
+	
+	
+	//Execute
+	moves = board.pieces[0][6].GetPawnMoves(&board);
+	
+	//Assert
+	ASSERT_EQ( moves.size(), 0);
+}
+
+TEST( PieceTest, KingMoves )
+{
+	//Setup
+	Board board;
+	Moves moves;
+
+	setUpBoard( board );
+
+	board.pieces[5][6]._color = BLACK;
+	board.pieces[5][6]._type = KING;	
+	
+	//Execute
+	moves = board.pieces[5][6].GetKingMoves(&board);
+	
+	//Assert
+	ASSERT_EQ( moves.size(), 8);
+}
+
+TEST( PieceTest, KingMovesTake )
+{
+	//Setup
+	Board board;
+	Moves moves;
+
+	setUpBoard( board );
+
+	board.pieces[5][6]._color = BLACK;
+	board.pieces[5][6]._type = KING;	
+	
+	board.pieces[5][7]._type = PAWN;	
+	
+	//Execute
+	moves = board.pieces[5][6].GetKingMoves(&board);
+	
+	//Assert
+	ASSERT_EQ( moves.size(), 8);
+}
+
+TEST( PieceTest, KingMovesEdge )
+{
+	//Setup
+	Board board;
+	Moves moves;
+
+	setUpBoard( board );
+
+	board.pieces[5][7]._color = BLACK;
+	board.pieces[5][7]._type = KING;	
+	
+	
+	//Execute
+	moves = board.pieces[5][7].GetKingMoves(&board);
+	
+	//Assert
+	ASSERT_EQ( moves.size(), 5);
+}
+
+TEST( PieceTest, KingMovesCorner )
+{
+	//Setup
+	Board board;
+	Moves moves;
+
+	setUpBoard( board );
+
+	board.pieces[7][7]._color = BLACK;
+	board.pieces[7][7]._type = KING;	
+	
+	
+	//Execute
+	moves = board.pieces[7][7].GetKingMoves(&board);
+	
+	//Assert
+	ASSERT_EQ( moves.size(), 3);
+}
