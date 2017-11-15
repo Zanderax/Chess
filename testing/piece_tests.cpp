@@ -16,13 +16,15 @@ TEST( PieceTest, PawnMoves )
 	{
 		for(int j = 0; j < 8; ++j)
 		{
+			board.pieces[i][j]._rank = i;
+			board.pieces[i][j]._ffile = j;
 			board.pieces[i][j]._color = WHITE;
 			board.pieces[i][j]._type = NONE;	
 		}
 	}
 
-	//board.pieces[5][6]._color = BLACK;
-	//board.pieces[5][6]._type = PAWN;	
+	board.pieces[5][6]._color = BLACK;
+	board.pieces[5][6]._type = PAWN;	
 
 	//Execute
 	moves = board.pieces[5][6].GetPawnMoves(&board);

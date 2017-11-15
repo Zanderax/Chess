@@ -105,7 +105,6 @@ Moves Piece::GetPawnMoves(Board *board)
 		}
 		if( pieces[_rank - 1][_ffile]._type == NONE )
 		{
-			printf("YEAH\n\n\n");
 			AddMove( moves, _rank, _ffile, _rank - 1, _ffile );
 		}
 		if( pieces[_rank - 1][_ffile + 1]._type != NONE &&
