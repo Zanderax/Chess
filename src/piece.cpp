@@ -203,21 +203,143 @@ Moves Piece::GetKingMoves(Board * board)
 	return moves; 
 }
 
-Moves Piece::GetQueenMoves(Board * /*board*/)
+Moves Piece::GetQueenMoves(Board * board)
 {
-	Moves moves; 
+	Moves rookMoves = GetRookMoves(board);
+	Moves moves = GetBishopMoves(board);
+	moves.insert(moves.end(), rookMoves.begin(), rookMoves.end());
 	return moves; 
 }
 
-Moves Piece::GetBishopMoves(Board * /*board*/)
+Moves Piece::GetKnightMoves(Board * board )
 {
-	Moves moves; 
+	Piece (*pieces)[8] = board->pieces;
+	Moves moves;
+
+	if(_rank > 1)
+	{
+		if(_ffile > 0)
+		{
+			AddMove( moves, _rank, _ffile, _rank - 2, _ffile - 1);
+		}
+		if(_ffile < 7)
+		{
+			AddMove( moves, _rank, _ffile, _rank - 2, _ffile + 1);
+		}
+	}
+	
+	if(_rank < 6)
+	{
+		if(_ffile > 0)
+		{
+			AddMove( moves, _rank, _ffile, _rank + 2, _ffile - 1);
+		}
+		if(_ffile < 7)
+		{
+			AddMove( moves, _rank, _ffile, _rank + 2, _ffile + 1);
+		}
+	}
+
+	if(_ffile > 1)
+	{
+		if(_rank > 0)
+		{
+			AddMove( moves, _rank, _ffile, _rank - 1, _ffile - 2);
+		}
+		if(_rank < 7)
+		{
+			AddMove( moves, _rank, _ffile, _rank + 1, _ffile - 2);
+		}
+	}
+
+	if(_ffile < 6)
+	{
+		if(_rank > 0)
+		{
+			AddMove( moves, _rank, _ffile, _rank - 1, _ffile + 2);
+		}
+		if(_rank < 7)
+		{
+			AddMove( moves, _rank, _ffile, _rank + 1, _ffile + 2);
+		}
+	}
+
 	return moves; 
 }
 
-Moves Piece::GetKnightMoves(Board * /*board*/)
+Moves Piece::GetBishopMoves(Board * board )
 {
-	Moves moves; 
+	Piece (*pieces)[8] = board->pieces;
+	Moves moves;
+
+	int f = _ffile;
+	int r = _rank;
+	while( r > 0 && f > 0 )
+	{
+		r--;
+		f--;
+		if(pieces[r][f]._type != NONE)
+		{
+			if(pieces[r][f]._color != _color)
+			{
+				AddMove( moves, _rank, _ffile, r, f );
+			}
+			break;
+		}
+		AddMove( moves, _rank, _ffile, r, f );
+	}
+
+	f = _ffile;
+	r = _rank;
+	while( r > 0 && f < 7 )
+	{
+		r--;
+		f++;
+		if(pieces[r][f]._type != NONE)
+		{
+			if(pieces[r][f]._color != _color)
+			{
+				AddMove( moves, _rank, _ffile, r, f );
+			}
+			break;
+		}
+		AddMove( moves, _rank, _ffile, r, f );
+	}
+
+	f = _ffile;
+	r = _rank;
+	while( r < 7 && f > 0 )
+	{
+		r++;
+		f--;
+		if(pieces[r][f]._type != NONE)
+		{
+			if(pieces[r][f]._color != _color)
+			{
+				AddMove( moves, _rank, _ffile, r, f );
+			}
+			break;
+		}
+		AddMove( moves, _rank, _ffile, r, f );
+	}
+
+	f = _ffile;
+	r = _rank;
+	while( r < 7 && f < 7 )
+	{
+		r++;
+		f++;
+		if(pieces[r][f]._type != NONE)
+		{
+			if(pieces[r][f]._color != _color)
+			{
+				AddMove( moves, _rank, _ffile, r, f );
+			}
+			break;
+		}
+		AddMove( moves, _rank, _ffile, r, f );
+	}
+
 	return moves; 
 }
 
