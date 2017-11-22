@@ -23,6 +23,19 @@ Board::Board()
 	ClearBoard();
 }
 
+Board::Board( const Board & board )
+{
+	ClearBoard();
+	for(int r = 0; r < RANK; ++r)
+	{
+		for(int f = 0; f < FFILE; ++f)
+		{
+			pieces[r][f]._type = board.pieces[r][f]._type;
+			pieces[r][f]._color = board.pieces[r][f]._color;
+		}
+	}
+}
+
 void Board::NewGame()
 {
 	ClearBoard();
@@ -217,4 +230,31 @@ bool Board::IsInCheck( Color color )
 		}
 	}
 	return false;
+}
+
+bool Board::IsInMate( Color color )
+{
+	if(!IsInCheck(color))
+	{
+		return false;
+	}
+
+	Moves moves = AllValidMoves( color );
+
+	for(auto move : moves)
+	{
+		Board board = LookAhead(move);
+		if(!board.IsInCheck(color))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+Board Board::LookAhead( Move move )
+{
+	Board board( *this );
+	board.MakeMove(move);
+	return board;
 }

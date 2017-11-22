@@ -22,6 +22,7 @@ class Board
 {
 public:
 	Board();
+	Board( const Board & board );
 	void NewGame();
 	void PrintBoard();
 	bool MakeMove( Move & move );
@@ -31,6 +32,8 @@ public:
 	Positions ValidPieces( Color color );
 	bool CanBeTaken( int r, int f, Color _color );
 	bool IsInCheck( Color color);
+	bool IsInMate( Color color);
+	Board LookAhead( Move move );
 
 private:
 	void ClearBoard();
