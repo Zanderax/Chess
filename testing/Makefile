@@ -123,6 +123,33 @@ runTests.out/fast:
 	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/build
 .PHONY : runTests.out/fast
 
+home/wizard/chess/src/board.o: home/wizard/chess/src/board.cpp.o
+
+.PHONY : home/wizard/chess/src/board.o
+
+# target to build an object file
+home/wizard/chess/src/board.cpp.o:
+	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/home/wizard/chess/src/board.cpp.o
+.PHONY : home/wizard/chess/src/board.cpp.o
+
+home/wizard/chess/src/board.i: home/wizard/chess/src/board.cpp.i
+
+.PHONY : home/wizard/chess/src/board.i
+
+# target to preprocess a source file
+home/wizard/chess/src/board.cpp.i:
+	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/home/wizard/chess/src/board.cpp.i
+.PHONY : home/wizard/chess/src/board.cpp.i
+
+home/wizard/chess/src/board.s: home/wizard/chess/src/board.cpp.s
+
+.PHONY : home/wizard/chess/src/board.s
+
+# target to generate assembly for a file
+home/wizard/chess/src/board.cpp.s:
+	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/home/wizard/chess/src/board.cpp.s
+.PHONY : home/wizard/chess/src/board.cpp.s
+
 home/wizard/chess/src/move.o: home/wizard/chess/src/move.cpp.o
 
 .PHONY : home/wizard/chess/src/move.o
@@ -213,6 +240,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... runTests.out"
 	@echo "... rebuild_cache"
+	@echo "... home/wizard/chess/src/board.o"
+	@echo "... home/wizard/chess/src/board.i"
+	@echo "... home/wizard/chess/src/board.s"
 	@echo "... home/wizard/chess/src/move.o"
 	@echo "... home/wizard/chess/src/move.i"
 	@echo "... home/wizard/chess/src/move.s"

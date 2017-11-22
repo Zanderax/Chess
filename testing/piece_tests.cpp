@@ -1,10 +1,7 @@
-#include "../src/piece.hpp"
+#include "gtest/gtest.h"
 
-class Board
-{
-	public:
-		Piece pieces[8][8];
-};
+#include "../src/board.hpp"
+#include "../src/piece.hpp"
 
 void setUpBoard( Board & board )
 {

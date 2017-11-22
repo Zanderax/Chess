@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include <list>
+
 void Board::ClearBoard()
 {
 	for(int r = 0; r < RANK; r++)
@@ -18,7 +20,7 @@ void Board::ClearBoard()
 
 Board::Board()
 {
-	NewGame();
+	ClearBoard();
 }
 
 void Board::NewGame()
@@ -31,14 +33,11 @@ void Board::NewGame()
 		pieces[7][i]._color = BLACK;
 	}
 	
-	/*
 	pieces[0][0]._type = ROOK;
 	pieces[0][1]._type = KNIGHT;
 	pieces[0][2]._type = BISHOP;
 	pieces[0][3]._type = QUEEN;
-	*/
 	pieces[0][4]._type = KING;
-	/*
 	pieces[0][5]._type = BISHOP;
 	pieces[0][6]._type = KNIGHT;
 	pieces[0][7]._type = ROOK;
@@ -48,13 +47,10 @@ void Board::NewGame()
 	pieces[7][1]._type = KNIGHT;
 	pieces[7][2]._type = BISHOP;
 	pieces[7][3]._type = QUEEN;
-	*/
 	pieces[7][4]._type = KING;
-	/*
 	pieces[7][5]._type = BISHOP;
 	pieces[7][6]._type = KNIGHT;
 	pieces[7][7]._type = ROOK;
-	*/
 	
 	for(int i = 0; i < 8; ++i)
 	{
@@ -154,4 +150,71 @@ Positions Board::ValidPieces( Color color )
 		}
 	}
 	return positions;
+}
+
+Moves Board::AllValidMoves( Color color )
+{
+	Moves moves;
+	for(int r = 0; r < RANK; ++r)
+	{
+		for(int f = 0; f < FFILE; ++f)
+		{
+			if(pieces[r][f]._color == color)
+			{
+				ValidMoves( moves, r, f );
+			}
+		}
+	}
+	return moves;
+}
+
+void Board::PrintMoves( Moves moves )
+{
+	for(auto move : moves)
+	{
+		printf("Source - r=%d, f=%d : Target - r=%d, f=%d\n",
+				move._sourceRank, move._sourceFFile,
+				move._targetRank, move._targetFFile);
+	}
+}
+
+bool Board::CanBeTaken( int r, int f, Color color )
+{
+	Moves moves;
+	if(color == BLACK)
+	{
+		moves = AllValidMoves(WHITE);
+	}
+	if(color == WHITE)
+	{
+		moves = AllValidMoves(BLACK);
+	}
+	
+	for(auto move : moves)
+	{
+		if(move._targetRank == r && 
+				move._targetFFile == f &&
+				pieces[move._sourceRank][move._sourceFFile]._color != color)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Board::IsInCheck( Color color )
+{
+	for(int r = 0; r < RANK; ++r)
+	{
+		for(int f = 0; f < FFILE; ++f)
+		{
+			if(pieces[r][f]._type == KING &&
+					pieces[r][f]._color == color &&
+					CanBeTaken( r, f, color))
+			{
+				return true;				
+			}
+		}
+	}
+	return false;
 }

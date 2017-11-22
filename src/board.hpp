@@ -27,11 +27,15 @@ public:
 	bool MakeMove( Move & move );
 	Piece pieces[RANK][FFILE];
 	void ValidMoves( Moves & moves, int rank, int ffile );
-	Positions ValidPieces( Color color );	
+	Moves AllValidMoves( Color color );
+	Positions ValidPieces( Color color );
+	bool CanBeTaken( int r, int f, Color _color );
+	bool IsInCheck( Color color);
 
 private:
 	void ClearBoard();
 	void PrintRank( int rank );
+	void PrintMoves( Moves moves );
 };
 
 #endif //PIECE_H
