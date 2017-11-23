@@ -333,6 +333,32 @@ TEST( PieceTest, KnightMoves )
 	ASSERT_EQ( moves.size(), 8);
 }
 
+TEST( PieceTest, KnightMovesBlocking )
+{
+	//Setup
+	Board board;
+	Moves moves;
+
+	setUpBoard( board );
+
+	board.pieces[4][4]._color = BLACK;
+	board.pieces[4][4]._type = KNIGHT;
+	
+	board.pieces[3][2]._color = BLACK;
+	board.pieces[3][2]._type = PAWN;
+	
+	board.pieces[6][5]._color = BLACK;
+	board.pieces[6][5]._type = PAWN;
+	
+	
+	//Execute
+	moves = board.pieces[4][4].GetMoves(&board);
+	
+	//Assert
+	ASSERT_EQ( moves.size(), 6);
+}
+	
+
 TEST( PieceTest, KnightMovesCorner )
 {
 	//Setup

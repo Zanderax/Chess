@@ -215,57 +215,41 @@ Moves Piece::GetQueenMoves(Board * board)
 	return moves; 
 }
 
-Moves Piece::GetKnightMoves(Board * board )
+Moves Piece::GetKnightMoves(Board & board )
 {
-	Piece (*pieces)[8] = board->pieces;
 	Moves moves;
 
-	if(_rank > 1)
+	if(board.CanTakeSquare(_rank - 2, _ffile - 1, _color ))
 	{
-		if(_ffile > 0)
-		{
-			AddMove( moves, _rank, _ffile, _rank - 2, _ffile - 1);
-		}
-		if(_ffile < 7)
-		{
-			AddMove( moves, _rank, _ffile, _rank - 2, _ffile + 1);
-		}
+		AddMove( moves, _rank, _ffile, _rank - 2, _ffile - 1);
 	}
-	
-	if(_rank < 6)
+	if(board.CanTakeSquare(_rank - 2, _ffile + 1, _color))
 	{
-		if(_ffile > 0)
-		{
-			AddMove( moves, _rank, _ffile, _rank + 2, _ffile - 1);
-		}
-		if(_ffile < 7)
-		{
-			AddMove( moves, _rank, _ffile, _rank + 2, _ffile + 1);
-		}
+		AddMove( moves, _rank, _ffile, _rank - 2, _ffile + 1);
 	}
-
-	if(_ffile > 1)
+	if(board.CanTakeSquare(_rank + 2, _ffile - 1, _color))
 	{
-		if(_rank > 0)
-		{
-			AddMove( moves, _rank, _ffile, _rank - 1, _ffile - 2);
-		}
-		if(_rank < 7)
-		{
-			AddMove( moves, _rank, _ffile, _rank + 1, _ffile - 2);
-		}
+		AddMove( moves, _rank, _ffile, _rank + 2, _ffile - 1);
 	}
-
-	if(_ffile < 6)
+	if(board.CanTakeSquare(_rank + 2, _ffile + 1, _color))
 	{
-		if(_rank > 0)
-		{
-			AddMove( moves, _rank, _ffile, _rank - 1, _ffile + 2);
-		}
-		if(_rank < 7)
-		{
-			AddMove( moves, _rank, _ffile, _rank + 1, _ffile + 2);
-		}
+		AddMove( moves, _rank, _ffile, _rank + 2, _ffile + 1);
+	}
+	if(board.CanTakeSquare(_rank - 1, _ffile - 2, _color))
+	{
+		AddMove( moves, _rank, _ffile, _rank - 1, _ffile - 2);
+	}
+	if(board.CanTakeSquare(_rank + 1, _ffile - 2, _color))
+	{
+		AddMove( moves, _rank, _ffile, _rank + 1, _ffile - 2);
+	}
+	if(board.CanTakeSquare(_rank - 1, _ffile + 2, _color))
+	{
+		AddMove( moves, _rank, _ffile, _rank - 1, _ffile + 2);
+	}
+	if(board.CanTakeSquare(_rank + 1, _ffile + 2, _color))
+	{
+		AddMove( moves, _rank, _ffile, _rank + 1, _ffile + 2);
 	}
 
 	return moves; 
@@ -439,7 +423,7 @@ Moves Piece::GetMoves(Board * board)
 			return GetBishopMoves(board);
 			break;
 		case KNIGHT:
-			return GetKnightMoves(board);
+			return GetKnightMoves(*board);
 			break;
 		case ROOK:
 			return GetRookMoves(board);

@@ -125,6 +125,14 @@ void Board::PrintBoard()
 	PrintEdge();
 }
 
+bool Board::CanTakeSquare( int rank, int ffile, Color _color )
+{
+	return (rank >= 0 && rank < 8) && (ffile >= 0 && ffile < 8) &&
+		(pieces[rank][ffile]._type == NONE 
+		 ||	pieces[rank][ffile]._color != _color);
+}
+
+
 bool Board::MakeMove( Move & move ) 
 {
 	if( !move.IsValid() )

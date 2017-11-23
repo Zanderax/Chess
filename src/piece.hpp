@@ -43,7 +43,7 @@ private:
 	Moves GetKingMoves(Board *board);
 	Moves GetQueenMoves(Board *board);
 	Moves GetBishopMoves(Board *board);
-	Moves GetKnightMoves(Board *board);
+	Moves GetKnightMoves(Board & board);
 	Moves GetRookMoves(Board *board);
 };
 

@@ -34,6 +34,7 @@ public:
 	bool IsInCheck( Color color);
 	bool IsInMate( Color color);
 	Board LookAhead( Move move );
+	bool CanTakeSquare( int rank, int ffile, Color _color );
 
 private:
 	void ClearBoard();
