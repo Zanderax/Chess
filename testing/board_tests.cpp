@@ -61,6 +61,19 @@ TEST( BoardTest, NotInCheck )
 	ASSERT_FALSE(board.IsInCheck(WHITE));
 }
 
+TEST( BoardTest, InCheckKnight )
+{
+	Board board;
+
+	board.pieces[0][0]._color = WHITE;
+	board.pieces[0][0]._type = KING;
+	
+	board.pieces[1][2]._color = BLACK;
+	board.pieces[1][2]._type = KNIGHT;
+	
+	ASSERT_TRUE(board.IsInCheck(WHITE));
+}
+
 TEST( BoardTest, InCheckMate )
 {
 	Board board;

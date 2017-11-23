@@ -33,7 +33,7 @@ void Chess::PlayManyGames( int numGames )
 			printf("Black Wins\n");
 			++blackWins;
 		}
-		else
+		else if(color == WHITE)
 		{
 			printf("White Wins\n");
 			++whiteWins;
@@ -62,16 +62,16 @@ Color Chess::PlayGame( int gameNum )
 			{
 				color = BLACK;
 			}
-			bool result = players[i].PlayTurn( board, color );
-			if(!result)
+			Result result = players[i].PlayTurn( board, color );
+			if(result == WIN)
 			{
-				if(color == WHITE)
-				{
-					return BLACK;
-				}
-				return WHITE;
+				return players[i]._color;
 			}
-			//getchar();
+			if(result == STALEMATE)
+			{
+				return NO_COLOR;
+			}
+			getchar();
 			//usleep( 5000000 );
 		}
 	}

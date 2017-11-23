@@ -5,7 +5,7 @@
 Piece::Piece()
 {
 	_type = NONE;
-	_color = WHITE;
+	_color = NO_COLOR;
 	_rank = 0;
 	_ffile = 0;
 }
@@ -48,6 +48,8 @@ int FGColorCode( Color color )
 			return 39;
 		case BLACK:
 			return 30;
+		case NO_COLOR:
+			return 39;
 	}
 	return 0;
 }
@@ -60,6 +62,8 @@ int BGColorCode( Color color )
 			return 41;
 		case BLACK:
 			return 40;
+		case NO_COLOR:
+			return 41;
 	}
 	return 0;
 }

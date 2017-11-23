@@ -3,10 +3,17 @@
 
 #include "board.hpp"
 
+enum Result
+{
+	CONTINUE,
+	WIN,
+	STALEMATE
+};
+
 class Player
 {
 public:
-	bool PlayTurn( Board & board, Color color );
+	Result PlayTurn( Board & board, Color color );
 	Color _color;
 };
 

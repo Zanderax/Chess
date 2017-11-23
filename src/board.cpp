@@ -13,7 +13,7 @@ void Board::ClearBoard()
 	{
 		for(int f = 0; f < FFILE; f++)
 		{
-			pieces[r][f] = Piece(WHITE, NONE, r,f );
+			pieces[r][f] = Piece(NO_COLOR, NONE, r,f );
 		}
 	}
 }
@@ -39,6 +39,12 @@ Board::Board( const Board & board )
 void Board::NewGame()
 {
 	ClearBoard();
+	
+	for(int i = 0; i < 8; ++i)
+	{
+		pieces[0][i]._color = WHITE;
+		pieces[1][i]._color = WHITE;
+	}
 	
 	for(int i = 0; i < 8; ++i)
 	{

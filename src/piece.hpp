@@ -22,7 +22,8 @@ enum PieceType
 enum Color
 {
 	BLACK,
-	WHITE
+	WHITE,
+	NO_COLOR
 };
 
 

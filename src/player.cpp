@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-bool Player::PlayTurn( Board & board, Color color )
+Result Player::PlayTurn( Board & board, Color color )
 {
 	srand(time(nullptr));
 
@@ -20,12 +20,29 @@ bool Player::PlayTurn( Board & board, Color color )
 		printf("Move %d. r=%d f=%d : r=%d f=%d\n", i, moves[i]._sourceRank, moves[i]._sourceFFile, moves[i]._targetRank, moves[i]._targetFFile );
 	}
 
-	if( moves.size() > 0 )	
+	if( moves.size() == 0 )	
 	{
-		auto moveIndex = (int)rand() % moves.size();
-		board.MakeMove( moves[moveIndex] );
-		return true;
+		return STALEMATE;
 	}
-	return false;
+
+	Color otherColor = BLACK;
+
+	if(color == BLACK)
+	{
+		otherColor = WHITE;
+	}
+	int moveIndex = 0;
+	do
+	{
+		moveIndex = (int)rand() % moves.size();
+	} while(board.LookAhead(moves[moveIndex]).IsInCheck(color));
+
+	board.MakeMove( moves[moveIndex] );
+	if(board.IsInMate(otherColor))
+	{
+		return WIN;
+	}
+
+	return CONTINUE;
 }
 
