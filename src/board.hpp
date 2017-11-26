@@ -52,4 +52,4 @@ private:
 	ColorState _hasQueenRookMoved;
 };
 
-#endif //PIECE_H
+#endif //BOARD_H

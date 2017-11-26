@@ -102,6 +102,7 @@ void PrintEdge()
 	printf("\n");
 }
 
+
 void Board::PrintRank( int r )
 {
 	r++;r--;

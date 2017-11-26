@@ -5,6 +5,6 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
 # Link runTests with our tests
-add_executable( runTests.out tests.cpp ../src/piece.cpp ../src/move.cpp ../src/board.cpp )
+add_executable( runTests.out tests.cpp ../src/piece.cpp ../src/move.cpp ../src/board.cpp ../src/board_printer.cpp )
 
 target_link_libraries(runTests.out ${GTEST_LIBRARIES} pthread)

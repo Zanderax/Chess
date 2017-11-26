@@ -150,6 +150,33 @@ home/wizard/chess/src/board.cpp.s:
 	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/home/wizard/chess/src/board.cpp.s
 .PHONY : home/wizard/chess/src/board.cpp.s
 
+home/wizard/chess/src/board_printer.o: home/wizard/chess/src/board_printer.cpp.o
+
+.PHONY : home/wizard/chess/src/board_printer.o
+
+# target to build an object file
+home/wizard/chess/src/board_printer.cpp.o:
+	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/home/wizard/chess/src/board_printer.cpp.o
+.PHONY : home/wizard/chess/src/board_printer.cpp.o
+
+home/wizard/chess/src/board_printer.i: home/wizard/chess/src/board_printer.cpp.i
+
+.PHONY : home/wizard/chess/src/board_printer.i
+
+# target to preprocess a source file
+home/wizard/chess/src/board_printer.cpp.i:
+	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/home/wizard/chess/src/board_printer.cpp.i
+.PHONY : home/wizard/chess/src/board_printer.cpp.i
+
+home/wizard/chess/src/board_printer.s: home/wizard/chess/src/board_printer.cpp.s
+
+.PHONY : home/wizard/chess/src/board_printer.s
+
+# target to generate assembly for a file
+home/wizard/chess/src/board_printer.cpp.s:
+	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/home/wizard/chess/src/board_printer.cpp.s
+.PHONY : home/wizard/chess/src/board_printer.cpp.s
+
 home/wizard/chess/src/move.o: home/wizard/chess/src/move.cpp.o
 
 .PHONY : home/wizard/chess/src/move.o
@@ -243,6 +270,9 @@ help:
 	@echo "... home/wizard/chess/src/board.o"
 	@echo "... home/wizard/chess/src/board.i"
 	@echo "... home/wizard/chess/src/board.s"
+	@echo "... home/wizard/chess/src/board_printer.o"
+	@echo "... home/wizard/chess/src/board_printer.i"
+	@echo "... home/wizard/chess/src/board_printer.s"
 	@echo "... home/wizard/chess/src/move.o"
 	@echo "... home/wizard/chess/src/move.i"
 	@echo "... home/wizard/chess/src/move.s"
