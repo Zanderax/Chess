@@ -39,6 +39,7 @@ public:
 	Board LookAhead( Move move );
 	bool CanTakeSquare( int rank, int ffile, Color _color );
 	bool CanKingCastle( Color _color );
+	void SetSquare( int rank, int file, PieceType type, Color color );
 
 private:
 	void ClearBoard();

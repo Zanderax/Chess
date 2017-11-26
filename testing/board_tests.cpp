@@ -38,6 +38,17 @@ TEST( BoardTest, NewGame)
 	}
 }
 
+TEST( BoardTest, SetPiece )
+{
+	Board board;
+
+	board.SetSquare( 4, 5, PAWN, BLACK );
+	
+	ASSERT_EQ(board.pieces[4][5]._type, PAWN);
+	ASSERT_EQ(board.pieces[4][5]._color, BLACK);
+}
+
+
 TEST( BoardTest, InCheck )
 {
 	Board board;

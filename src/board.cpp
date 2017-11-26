@@ -137,6 +137,12 @@ void Board::PrintBoard()
 	PrintEdge();
 }
 
+void Board::SetSquare( int rank, int file, PieceType type, Color color )
+{
+	pieces[rank][file]._type = type;
+	pieces[rank][file]._color = color;
+}
+
 bool Board::CanTakeSquare( int rank, int ffile, Color _color )
 {
 	return (rank >= 0 && rank < 8) && (ffile >= 0 && ffile < 8) &&
