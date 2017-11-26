@@ -38,7 +38,7 @@ TEST( BoardTest, NewGame)
 	}
 }
 
-TEST( BoardTest, SetPiece )
+TEST( BoardTest, SetSquare )
 {
 	Board board;
 
