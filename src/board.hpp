@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include <vector>
+#include <map>
+#include <functional>
 #include "piece.hpp"
 #include "move.hpp"
 
@@ -17,6 +19,7 @@ struct Position
 
 using Moves = std::vector<Move>;
 using Positions = std::vector<Position>;
+using ColorState = std::map<Color, bool>;
 
 class Board
 {
@@ -31,15 +34,21 @@ public:
 	Moves AllValidMoves( Color color );
 	Positions ValidPieces( Color color );
 	bool CanBeTaken( int r, int f, Color _color );
-	bool IsInCheck( Color color);
-	bool IsInMate( Color color);
+	bool IsInCheck( Color color );
+	bool IsInMate( Color color );
 	Board LookAhead( Move move );
 	bool CanTakeSquare( int rank, int ffile, Color _color );
+	bool CanKingCastle( Color _color );
 
 private:
 	void ClearBoard();
 	void PrintRank( int rank );
 	void PrintMoves( Moves moves );
+	void CreatePlayer(Color color);
+
+	ColorState _hasKingMoved;
+	ColorState _hasKingRookMoved;
+	ColorState _hasQueenRookMoved;
 };
 
 #endif //PIECE_H

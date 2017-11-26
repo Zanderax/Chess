@@ -21,11 +21,15 @@ void Board::ClearBoard()
 Board::Board()
 {
 	ClearBoard();
+	CreatePlayer(BLACK);
+	CreatePlayer(WHITE);
 }
 
 Board::Board( const Board & board )
 {
 	ClearBoard();
+	CreatePlayer(BLACK);
+	CreatePlayer(WHITE);
 	for(int r = 0; r < RANK; ++r)
 	{
 		for(int f = 0; f < FFILE; ++f)
@@ -35,6 +39,14 @@ Board::Board( const Board & board )
 		}
 	}
 }
+
+void Board::CreatePlayer(Color color)
+{
+	_hasKingMoved.emplace(color, false);
+	_hasKingRookMoved.emplace(color, false);
+	_hasQueenRookMoved.emplace(color, false);
+}
+
 
 void Board::NewGame()
 {
@@ -131,7 +143,6 @@ bool Board::CanTakeSquare( int rank, int ffile, Color _color )
 		(pieces[rank][ffile]._type == NONE 
 		 ||	pieces[rank][ffile]._color != _color);
 }
-
 
 bool Board::MakeMove( Move & move ) 
 {
@@ -271,4 +282,32 @@ Board Board::LookAhead( Move move )
 	Board board( *this );
 	board.MakeMove(move);
 	return board;
+}
+
+bool Board::CanKingCastle(Color color)
+{
+	if(_hasKingMoved[color] || _hasKingRookMoved[color])
+	{
+		return false;
+	}
+
+	int r = 0;
+	if(color == BLACK)
+	{
+		r = 7;
+	}
+
+	if(pieces[r][5]._type != NONE || pieces[r][6]._type != NONE )
+	{
+		return false;
+	}
+
+	if( CanBeTaken(r, 4, color) || 
+			CanBeTaken(r, 5, color) ||
+			CanBeTaken(r, 6, color))
+	{
+		return false;
+	}
+
+	return true;
 }

@@ -99,3 +99,84 @@ TEST( BoardTest, NotInCheckMate )
 	
 	ASSERT_FALSE(board.IsInMate(WHITE));
 }
+
+TEST( BoardTest, BlackKingCastle )
+{
+	Board board;
+
+	board.pieces[7][4]._color = BLACK;
+	board.pieces[7][4]._type = KING;
+	board.pieces[7][7]._color = BLACK;
+	board.pieces[7][7]._type = ROOK;
+	
+	ASSERT_TRUE(board.CanKingCastle(BLACK));
+}
+
+TEST( BoardTest, BlackKingCastleBlocked )
+{
+	Board board;
+
+	board.pieces[7][4]._color = BLACK;
+	board.pieces[7][4]._type = KING;
+	board.pieces[7][6]._color = BLACK;
+	board.pieces[7][6]._type = KNIGHT;
+	board.pieces[7][7]._color = BLACK;
+	board.pieces[7][7]._type = ROOK;
+
+	ASSERT_FALSE(board.CanKingCastle(BLACK));
+}
+
+TEST( BoardTest, BlackKingCastleThroughCheck )
+{
+	Board board;
+
+	board.pieces[7][4]._color = BLACK;
+	board.pieces[7][4]._type = KING;
+	board.pieces[7][7]._color = BLACK;
+	board.pieces[7][7]._type = ROOK;
+	
+	board.pieces[6][5]._color = WHITE;
+	board.pieces[6][5]._type = ROOK;
+
+	ASSERT_FALSE(board.CanKingCastle(BLACK));
+}
+
+TEST( BoardTest, WhiteKingCastle )
+{
+	Board board;
+
+	board.pieces[0][4]._color = WHITE;
+	board.pieces[0][4]._type = KING;
+	board.pieces[0][7]._color = WHITE;
+	board.pieces[0][7]._type = ROOK;
+	
+	ASSERT_TRUE(board.CanKingCastle(WHITE));
+}
+
+TEST( BoardTest, WhiteKingCastleBlocked )
+{
+	Board board;
+
+	board.pieces[0][4]._color = WHITE;
+	board.pieces[0][4]._type = KING;
+	board.pieces[0][6]._color = WHITE;
+	board.pieces[0][6]._type = KNIGHT;
+	board.pieces[0][7]._color = WHITE;
+	board.pieces[0][7]._type = ROOK;
+	
+	ASSERT_FALSE(board.CanKingCastle(WHITE));
+}
+
+TEST( BoardTest, WhiteKingCastleThroughCheck )
+{
+	Board board;
+
+	board.pieces[0][4]._color = WHITE;
+	board.pieces[0][4]._type = KING;
+	board.pieces[1][6]._color = BLACK;
+	board.pieces[1][6]._type = ROOK;
+	board.pieces[0][7]._color = WHITE;
+	board.pieces[0][7]._type = ROOK;
+	
+	ASSERT_FALSE(board.CanKingCastle(WHITE));
+}
