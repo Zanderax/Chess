@@ -1,5 +1,7 @@
 #include "../src/board.hpp"
 
+char digits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+
 TEST( BoardTest, NewGame)
 {
 	Board board;
@@ -111,6 +113,34 @@ TEST( BoardTest, NotInCheckMate )
 	ASSERT_FALSE(board.IsInMate(WHITE));
 }
 
+TEST( BoardTest, BlackQueenCastle )
+{
+	Board board;
+
+	board.pieces[7][4]._color = BLACK;
+	board.pieces[7][4]._type = KING;
+	board.pieces[7][0]._color = BLACK;
+	board.pieces[7][0]._type = ROOK;
+	
+	ASSERT_TRUE(board.CanQueenCastle(BLACK));
+}
+
+TEST( BoardTest, BlackQueenCastleBlocked )
+{
+	Board board;
+
+	board.pieces[7][4]._color = BLACK;
+	board.pieces[7][4]._type = KING;
+
+	board.pieces[7][3]._color = BLACK;
+	board.pieces[7][3]._type = QUEEN;
+
+	board.pieces[7][0]._color = BLACK;
+	board.pieces[7][0]._type = ROOK;
+	
+	ASSERT_FALSE(board.CanQueenCastle(BLACK));
+}
+
 TEST( BoardTest, BlackKingCastle )
 {
 	Board board;
@@ -191,3 +221,42 @@ TEST( BoardTest, WhiteKingCastleThroughCheck )
 	
 	ASSERT_FALSE(board.CanKingCastle(WHITE));
 }
+
+TEST( BoardTest, PrintBoard )
+{
+	testing::internal::CaptureStdout();
+
+	Board board;
+	board.PrintBoard();
+
+	std::string expected;
+
+	expected += "\x1B[3;J\x1B[H\x1B[2J";
+
+	expected += " 01234567 \n";
+
+	for(int j = 0; j < 4; ++j)
+	{
+		expected += digits[j*2];
+		for(int i = 0; i < 4; ++i)
+		{
+			expected += "\x1B[4;1;41;39m \x1B[0m\x1B[4;1;40;39m \x1B[0m";
+		}
+		expected += "|\n";
+		
+		expected += digits[j*2+1];
+		for(int i = 0; i < 4; ++i)
+		{
+			expected += "\x1B[4;1;40;39m \x1B[0m\x1B[4;1;41;39m \x1B[0m";
+		}
+		expected += "|\n";
+		
+	}
+	
+	expected += "+========+\n";
+	
+	std::string stdout = testing::internal::GetCapturedStdout();
+
+	ASSERT_EQ( expected, stdout );
+}
+

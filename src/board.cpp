@@ -1,4 +1,5 @@
 #include "board.hpp"
+#include "board_printer.hpp"
 #include "piece.hpp"
 #include "move.hpp"
 
@@ -91,46 +92,26 @@ void Board::NewGame()
 	
 }
 
-void PrintEdge()
+void PrintFileNumbers()
 {
-	printf("+");
-	for(int i = 0; i < 8; ++i)
-	{
-		printf("=");
-	}
-	printf("+");
-	printf("\n");
+	BoardPrinter::PrintFileNumbers();
 }
 
+void PrintEdge()
+{
+	BoardPrinter::PrintEdge();
+}
 
 void Board::PrintRank( int r )
 {
-	r++;r--;
-	printf("|");
-	if( r%2 == 0 )
-	{
-		for(int f = 0; f < 8; f+=2)
-		{
-			pieces[r][f].PrintPiece( WHITE );
-			pieces[r][f+1].PrintPiece( BLACK );
-		}
-	}
-	if( r%2 != 0 )
-	{
-		for(int f = 0; f < 8; f+=2)
-		{
-			pieces[r][f].PrintPiece( BLACK );
-			pieces[r][f+1].PrintPiece( WHITE );
-		}
-	}
-	printf("|");
-	printf("\n");
+	BoardPrinter::PrintRank( *this, r );
 }
 
 void Board::PrintBoard()
 {
-	if(system("CLS")) system("clear");
-	PrintEdge();
+	system("clear");
+	PrintFileNumbers();
+	//PrintEdge();
 	for(int i = 0; i < 8; ++i)
 	{
 		PrintRank(i);
@@ -312,6 +293,23 @@ bool Board::CanKingCastle(Color color)
 	if( CanBeTaken(r, 4, color) || 
 			CanBeTaken(r, 5, color) ||
 			CanBeTaken(r, 6, color))
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool Board::CanQueenCastle(Color color)
+{
+	int r = 0;
+	if(color == BLACK)
+	{
+		r = 7;
+	}
+
+	if(pieces[r][1]._type != NONE || pieces[r][2]._type != NONE ||
+	pieces[r][3]._type != NONE )
 	{
 		return false;
 	}

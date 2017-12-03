@@ -6,8 +6,9 @@
 class BoardPrinter
 {
 public:
-	void PrintEdge();	
-	void PrintRank( const Board & board, int r );
+	static void PrintFileNumbers();
+	static void PrintEdge();	
+	static void PrintRank( const Board & board, int r );
 };
 
 #endif //BOARD_PRINTER_H

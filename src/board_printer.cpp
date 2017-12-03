@@ -4,6 +4,11 @@
 
 #include <stdio.h>
 
+void BoardPrinter::PrintFileNumbers()
+{
+	printf( " 01234567 \n");
+}
+
 void BoardPrinter::PrintEdge()
 {
 	printf("+");
@@ -19,7 +24,7 @@ void BoardPrinter::PrintRank( const Board& board, int r )
 {
 	Piece pieces[8][8] = board.pieces;
 	r++;r--;
-	printf("|");
+	printf("%d", r);
 	if( r%2 == 0 )
 	{
 		for(int f = 0; f < 8; f+=2)
