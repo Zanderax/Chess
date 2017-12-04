@@ -307,6 +307,13 @@ bool Board::CanQueenCastle(Color color)
 	{
 		r = 7;
 	}
+	
+	if( CanBeTaken(r, 2, color) || 
+			CanBeTaken(r, 3, color) ||
+			CanBeTaken(r, 4, color))
+	{
+		return false;
+	}
 
 	if(pieces[r][1]._type != NONE || pieces[r][2]._type != NONE ||
 	pieces[r][3]._type != NONE )

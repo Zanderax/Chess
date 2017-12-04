@@ -141,6 +141,28 @@ TEST( BoardTest, BlackQueenCastleBlocked )
 	ASSERT_FALSE(board.CanQueenCastle(BLACK));
 }
 
+TEST( BoardTest, BlackQueenCastleThroughCheck )
+{
+	Board board;
+	
+	board.SetSquare(7, 4, KING, BLACK);
+	board.SetSquare(7, 0, ROOK, BLACK);
+	board.SetSquare(6, 3, ROOK, WHITE);
+	
+	ASSERT_FALSE(board.CanQueenCastle(BLACK));
+}
+
+TEST( BoardTest, BlackQueenCastleOnlyTheRook )
+{
+	Board board;
+	
+	board.SetSquare(7, 4, KING, BLACK);
+	board.SetSquare(7, 0, ROOK, BLACK);
+	board.SetSquare(6, 1, ROOK, WHITE);
+	
+	ASSERT_TRUE(board.CanQueenCastle(BLACK));
+}
+
 TEST( BoardTest, BlackKingCastle )
 {
 	Board board;
