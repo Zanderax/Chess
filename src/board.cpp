@@ -300,6 +300,7 @@ bool Board::CanKingCastle(Color color)
 	return true;
 }
 
+
 bool Board::CanQueenCastle(Color color)
 {
 	int r = 0;
@@ -323,3 +324,48 @@ bool Board::CanQueenCastle(Color color)
 
 	return true;
 }
+/*
+bool Board::IsBareKing( Color color )
+{
+	for(auto i = 0; i < RANK; ++i )
+	{
+		for(auto j = 0; j < FFILE; ++j )
+		{
+			if(pieces[i][j]._type != KING && pieces[i][j]._color == color)
+			{
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+void Board::IsOnlyKingAndBishop( Color color )
+{
+	bool king = false;
+	bool bishop = false;
+
+	for(auto i = 0; i < RANK; ++i )
+	{
+		for(auto j = 0; j < FFILE; ++j )
+		{
+			if(pieces[i][j]._type != KING && pieces[i][j]._color == color)
+			{
+			}
+		}
+	}
+}
+
+bool Board::IsStalemate()
+{
+	if(IsInCheck(BLACK) || IsInCheck(WHITE))
+	{
+		return false;
+	}
+	if(IsBareKing(BLACK) && IsBareKing(WHITE))
+	{
+		return true;
+	}
+	return false;
+}
+*/

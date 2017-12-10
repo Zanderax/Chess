@@ -40,6 +40,7 @@ public:
 	bool CanTakeSquare( int rank, int ffile, Color _color );
 	bool CanKingCastle( Color _color );
 	bool CanQueenCastle( Color _color );
+	//bool IsStalemate();
 	void SetSquare( int rank, int file, PieceType type, Color color );
 
 private:
@@ -47,6 +48,10 @@ private:
 	void PrintRank( int rank );
 	void PrintMoves( Moves moves );
 	void CreatePlayer(Color color);
+	/*
+	bool IsBareKing(Color color);
+	bool IsOnlyKingAndBishop(Color color);
+	*/
 
 	ColorState _hasKingMoved;
 	ColorState _hasKingRookMoved;
