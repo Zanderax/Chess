@@ -13,6 +13,9 @@ OBJECTS := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
 all: build $(APP_DIR)/$(TARGET)
 
+test:
+	cd testing && $(MAKE)
+
 $(OBJ_DIR)/%.o: %.cpp
 	   @mkdir -p $(@D)
 	      $(CXX) $(CXXFLAGS) $(INCLUDE) -o $@ -c $<
