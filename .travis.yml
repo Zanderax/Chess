@@ -1,3 +1,4 @@
 language: cpp
 compiler: gcc
 install: cmake
+script: make && cd test && cmake CMakeLists.txt && make && ./runTests.out
