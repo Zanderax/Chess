@@ -1,5 +1,5 @@
 CXX      := -g++
-CXXFLAGS := -Wall -Wextra -Werror -O3 -Wno-unused-variable -Wno-unused-result -std=c++17 -Wfatal-errors
+CXXFLAGS := -Wall -Wextra -Werror -O3 -Wno-unused-variable -Wno-unused-result -Wfatal-errors
 LDFLAGS  := -L/usr/lib -lstdc++ -lm 
 BUILD    := build
 OBJ_DIR  := $(BUILD)/objects
