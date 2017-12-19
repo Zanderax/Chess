@@ -1,4 +1,4 @@
 language: cpp
 compiler: gcc
-install: cmake
+install: cmake GTest 
 script: make && cd testing && cmake CMakeLists.txt && make && ./runTests.out
