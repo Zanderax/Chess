@@ -1,6 +1,6 @@
 language: cpp
 compiler: gcc
-install: cmake GTest
+install: cmake
 
 before_install:
    - sudo apt-get -qq update
