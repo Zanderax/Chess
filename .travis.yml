@@ -1,7 +1,7 @@
 language: cpp
 compiler: gcc
-install: cmake
-
+os: linux
+dist: trusty
 before_install:
    - sudo apt-get -qq update
    - sudo apt-get install -y libgtest-dev valgrind
